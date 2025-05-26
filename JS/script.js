@@ -16,6 +16,7 @@ async function fetchWeatherData() {
 
         if (!geoData.length) {
             weatherResultContainer.innerHTML = "<p>Aucune commune trouvée pour ce code postal.</p>";
+            document.getElementById('radar-container').innerHTML = ""; // Vide la carte si erreur
             return;
         }
 
@@ -30,8 +31,22 @@ async function fetchWeatherData() {
         // Générer l'affichage météo selon les options
         displayForecastCards(cityName, latitude, longitude, weatherData.forecast.slice(0, days), options);
 
+        // Afficher la carte radar Windy centrée sur la ville
+        document.getElementById('radar-container').innerHTML = `
+            <h2 style="text-align:center;margin-top:30px;">Radar météo en direct</h2>
+            <iframe
+                width="100%"
+                height="400"
+                src="https://embed.windy.com/embed2.html?lat=${latitude}&lon=${longitude}&zoom=8&level=surface&overlay=radar"
+                frameborder="0"
+                style="border-radius:16px;overflow:hidden;margin:30px 0;display:block;"
+                allowfullscreen
+            ></iframe>
+        `;
+
     } catch (error) {
         weatherResultContainer.innerHTML = "<p>Erreur lors de la récupération des données météo.</p>";
+        document.getElementById('radar-container').innerHTML = ""; // Vide la carte si erreur
         console.error(error);
     }
 }
@@ -123,5 +138,20 @@ function displayWeather(data) {
         resultSection.innerHTML += html;
     });
 }
+
+// Carte radar météo Windy
+const windyInit = () => {
+    const options = {
+        key: 'RwUR5OdSUrHF8LijvcBdTbpCq3xvLFuE',
+        lat: 48.85, // Latitude par défaut (Paris)
+        lon: 2.35,  // Longitude par défaut
+        zoom: 5,
+        overlay: 'radar'
+    };
+    if (window.WindyAPI) {
+        window.WindyAPI.map.setView([options.lat, options.lon], options.zoom);
+        window.WindyAPI.map.setOverlay(options.overlay);
+    }
+};
 
 

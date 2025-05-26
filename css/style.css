@@ -13,8 +13,8 @@
 /* STYLE GLOBAL             */
 /* ========================= */
 body {
+    background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
     min-height: 100vh;
-    background: linear-gradient(120deg, #e3f0ff 0%, #f9f9f9 100%);
     font-family: 'Inter', 'Quicksand', Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -145,7 +145,7 @@ button {
     font-size: 1.1rem;
     margin-top: 10px;
     box-shadow: 0 2px 8px rgba(25,118,210,0.08);
-    transition: background 0.2s, transform 0.2s;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
 }
 
 button:hover, button:focus {
@@ -185,7 +185,6 @@ fieldset legend {
     padding: 8px 12px;
     margin-bottom: 0;
     box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-    transition: background 0.2s, box-shadow 0.2s;
     cursor: pointer;
     font-size: 1rem;
 }
@@ -242,16 +241,12 @@ fieldset legend {
 }
 
 .weather-card:hover {
-    transform: translateY(-6px) scale(1.03);
+    transform: translateY(-2px) scale(1.02);
     box-shadow: 0 8px 32px rgba(0,0,0,0.14);
     border-color: #1976d2;
     background: #f7fbff;
 }
 
-
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px);}
-    to { opacity: 1; transform: translateY(0);}
 }
 
 /* Titre de la carte */
@@ -276,10 +271,6 @@ fieldset legend {
     height: 70px; 
 }
 
-.weather-card .weather-icon img {
-    display: block;
-    margin: 0 auto;
-}
 
 /* Informations météo */
 .weather-card p {
@@ -293,13 +284,13 @@ fieldset legend {
 }
 
 .weather-card .temp-max {
-    font-size: 2.1rem;
+    font-size: 2rem;
     color: #e65100;
     font-weight: bold;
 }
 
 .weather-card .temp-min {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: #0288d1;
     font-weight: bold;
 }

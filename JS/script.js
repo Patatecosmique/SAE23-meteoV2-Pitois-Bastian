@@ -55,28 +55,22 @@ function displayForecastCards(cityName, latitude, longitude, forecasts, options)
         const formattedDate = dateFormatter.format(forecastDate);
         const capitalizedDate = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
 
-        // Choix de l'icône météo selon les conditions
-        let icon = "☀️"; // Par défaut soleil
-        // Si le temps d'ensoleillement est élevé (ex: >5h)
-        if (day.sunshine !== undefined && day.sunshine !== null && day.sunshine > 5 * 60) {
-            icon = "🌞";
-        } else if (day.rr10 !== undefined && day.rr10 !== null && day.rr10 > 5) {
-            icon = "🌧️"; // Pluie forte
-        } else if (day.probarain !== undefined && day.probarain !== null && day.probarain > 70) {
-            icon = "🌧️"; // Forte probabilité de pluie
-        } else if (day.wind10m !== undefined && day.wind10m !== null && day.wind10m > 40) {
-            icon = "🏴‍☠️"; // Beaucoup de vent (drapeau)
-        } else if (day.tmin !== undefined && day.tmax !== undefined && ((day.tmax + day.tmin) / 2 < 5)) {
-            icon = "❄️"; // Froid
-        } else if (day.cloudcover !== undefined && day.cloudcover !== null && day.cloudcover > 60) {
-            icon = "☁️"; // Nuageux
-        } else if (day.probarain !== undefined && day.probarain !== null && day.probarain > 30) {
-            icon = "🌦️"; // Risque d'averses
+        // Choix du GIF météo selon les conditions
+        let iconGif = "sun.gif"; // Par défaut
+        if (day.rr10 !== undefined && day.rr10 !== null && day.rr10 > 5) {
+            iconGif = "rain.gif"; // Pluie forte
+        } else if (
+            (day.probarain !== undefined && day.probarain !== null && day.probarain > 30) ||
+            (day.cloudcover !== undefined && day.cloudcover !== null && day.cloudcover > 60)
+        ) {
+            iconGif = "rain-cloud.gif"; // Nuageux ou risque d'averses
+        } else if (day.sunshine !== undefined && day.sunshine !== null && day.sunshine > 5 * 60) {
+            iconGif = "sun.gif"; // Ensoleillé
         }
 
         html += `<div class="weather-card">`;
         html += `<h3>${capitalizedDate}</h3>`;
-        html += `<div class="weather-icon" style="font-size:2.5rem;text-align:center;">${icon}</div>`;
+        html += `<div class="weather-icon"><img src="img/weather/${iconGif}" alt="Icône météo" width="64" height="64"></div>`;
         html += `<p><strong>Temp. Min :</strong> ${day.tmin}°C</p>`;
         html += `<p><strong>Temp. Max :</strong> ${day.tmax}°C</p>`;
         if (options.coordinates) {

@@ -93,9 +93,8 @@ function getSelectedOptions() {
         rain: document.getElementById('show-rain').checked,
         wind: document.getElementById('show-wind').checked,
         windDir: document.getElementById('show-wind-dir').checked,
-        humidity: document.getElementById('show-humidity').checked,
-        sunrise: document.getElementById('show-sunrise').checked,
-        sunset: document.getElementById('show-sunset').checked,
+        humidity: document.getElementById('show-humidity').checked
+        // sunrise et sunset supprimés
     };
 }
 
@@ -104,7 +103,6 @@ function displayWeather(data) {
     const resultSection = document.getElementById('weather-result');
     resultSection.innerHTML = ""; // Nettoie l'affichage précédent
 
-    // Exemple pour chaque jour (adapte selon ta structure de données)
     data.forEach(day => {
         let html = `<div class="weather-card">`;
         html += `<h3>${day.date}</h3>`;
@@ -115,8 +113,7 @@ function displayWeather(data) {
         if (options.wind && day.wind) html += `<p>Vent moyen : ${day.wind} km/h</p>`;
         if (options.windDir && day.windDir) html += `<p>Direction vent : ${day.windDir}°</p>`;
         if (options.humidity && day.humidity) html += `<p>Humidité : ${day.humidity}%</p>`;
-        if (options.sunrise && day.sunrise) html += `<p>Lever du soleil : ${day.sunrise}</p>`;
-        if (options.sunset && day.sunset) html += `<p>Coucher du soleil : ${day.sunset}</p>`;
+        // sunrise et sunset supprimés
         html += `</div>`;
         resultSection.innerHTML += html;
     });

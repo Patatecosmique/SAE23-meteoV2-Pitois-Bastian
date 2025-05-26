@@ -106,4 +106,10 @@ function getSelectedOptions() {
 }
 
 
-
+window.addEventListener('load', function() {
+    const loader = document.getElementById('loader-frog');
+    loader.classList.add('hide');
+    setTimeout(() => {
+        loader.style.display = 'none';
+    }, 3000); // doit correspondre à la durée du transition CSS
+});

@@ -318,3 +318,17 @@ fieldset legend {
     color: #555;
 }
 
+#loader-frog {
+    position: fixed;
+    z-index: 9999;
+    background: #f7fbff;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 3s cubic-bezier(0.4, 0, 0.2, 1);
+}

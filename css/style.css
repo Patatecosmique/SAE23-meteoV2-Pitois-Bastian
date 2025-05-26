@@ -21,6 +21,22 @@ body {
     background-color: #f4f4f9;
     color: #333;
 }
+/* ========================= */
+/* EFFETS FOCUS             */
+/* ========================= */
+input:focus,
+button:focus {
+    outline: 2px solid var(--blue); 
+    outline-offset: 2px; 
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #777;
+}
+
 
 /* ========================= */
 /* CONTENEUR PRINCIPAL      */
@@ -221,12 +237,14 @@ fieldset legend {
     transition: transform 0.2s, box-shadow 0.2s;
     position: relative;
     animation: fadeInUp 0.7s;
+    animation-fill-mode: both;
 }
 
 .weather-card:hover {
     transform: translateY(-6px) scale(1.03);
     box-shadow: 0 8px 32px rgba(0,0,0,0.14);
 }
+
 
 @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(30px);}
@@ -296,35 +314,6 @@ fieldset legend {
     color: #555;
 }
 
-/* ========================= */
-/* EFFETS FOCUS             */
-/* ========================= */
-input:focus,
-button:focus {
-    outline: 2px solid var(--blue); 
-    outline-offset: 2px; 
-}
 
-footer {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 0.9rem;
-    color: #777;
-}
-
-/* Responsive */
-@media (max-width: 700px) {
-    main {
-        padding: 10px 2vw;
-    }
-    .weather-cards-container {
-        flex-direction: column;
-        gap: 18px;
-    }
-    .weather-card {
-        min-width: unset;
-        max-width: 98vw;
-    }
-}
 
 

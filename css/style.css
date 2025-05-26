@@ -194,45 +194,66 @@ fieldset legend {
 
 /* Conteneur des cartes météo */
 .weather-cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
 }
 
 /* Style des cartes */
 .weather-card {
-    background: #fff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s; 
+    background: linear-gradient(135deg, #e3f0ff 0%, #f9f9f9 100%);
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    padding: 28px 22px 20px 22px;
+    min-width: 240px;
+    max-width: 320px;
+    margin: 0 auto;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
 }
 
 .weather-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); 
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.14);
 }
 
 /* Titre de la carte */
 .weather-card h3 {
-    font-size: 1.4rem; 
-    margin-bottom: 1rem; 
-    color: var(--text-color); 
+    font-size: 1.3rem;
+    margin-bottom: 0.7em;
+    color: #1976d2;
+    letter-spacing: 0.02em;
 }
 
 /* Icône météo */
-.weather-card .icon {
-    font-size: 4rem; 
-    margin: 1rem 0; 
-    color: var(--blue); 
+.weather-card .weather-icon {
+    font-size: 3.5rem;
+    margin-bottom: 0.5em;
+    color: #1976d2;
 }
 
 /* Informations météo */
 .weather-card p {
-    margin: 0.5rem 0;
-    font-size: 1rem; 
-    color: #555; 
+    margin: 0.4em 0;
+    font-size: 1.08rem;
+    color: #333;
+}
+
+.weather-card strong {
+    color: #1976d2;
+}
+
+.weather-card .temp-max {
+    font-size: 2.1rem;
+    color: #e65100;
+    font-weight: bold;
+}
+
+.weather-card .temp-min {
+    font-size: 1.5rem;
+    color: #0288d1;
+    font-weight: bold;
 }
 
 .weather-card .date {

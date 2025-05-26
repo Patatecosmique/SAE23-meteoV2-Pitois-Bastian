@@ -317,7 +317,9 @@ fieldset legend {
     font-size: 0.9rem;
     color: #555;
 }
-
+/* ========================= */
+/* LOADER  */
+/* ========================= */
 #loader-frog {
     position: fixed;
     z-index: 9999;

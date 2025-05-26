@@ -247,8 +247,6 @@ fieldset legend {
     background: #f7fbff;
 }
 
-}
-
 /* Titre de la carte */
 .weather-card h3 {
     font-size: 1.3rem;
@@ -319,7 +317,4 @@ fieldset legend {
     font-size: 0.9rem;
     color: #555;
 }
-
-
-
 

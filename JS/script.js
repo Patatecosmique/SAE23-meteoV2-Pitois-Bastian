@@ -57,7 +57,9 @@ function displayForecastCards(cityName, latitude, longitude, forecasts, options)
 
         // Choix du GIF météo selon les conditions
         let iconGif = "sun.gif"; // Par défaut
-        if (day.rr10 !== undefined && day.rr10 !== null && day.rr10 > 5) {
+        if (day.wind10m !== undefined && day.wind10m !== null && day.wind10m > 40) {
+            iconGif = "wind.gif"; // Beaucoup de vent
+        } else if (day.rr10 !== undefined && day.rr10 !== null && day.rr10 > 5) {
             iconGif = "rain.gif"; // Pluie forte
         } else if (
             (day.probarain !== undefined && day.probarain !== null && day.probarain > 30) ||

@@ -30,7 +30,44 @@
                 placeholder="Ex : 75001" 
             />
             <small id="postal-code-help">Entrez un code postal français à 5 chiffres.</small>
-
+            <!-- Options d'informations supplémentaires -->
+            <fieldset>
+                <legend>Informations supplémentaires à afficher :</legend>
+                <div class="fieldset-options">
+                    <label>
+                        <input type="checkbox" id="show-latitude" name="extra-info" value="latitude" checked>
+                        Latitude décimale de la commune
+                    </label>
+                    <label>
+                        <input type="checkbox" id="show-longitude" name="extra-info" value="longitude" checked>
+                        Longitude décimale de la commune
+                    </label>
+                    <label>
+                        <input type="checkbox" id="show-rain" name="extra-info" value="rain">
+                        Cumul de pluie sur la journée (mm)
+                    </label>
+                    <label>
+                        <input type="checkbox" id="show-wind" name="extra-info" value="wind">
+                        Vent moyen à 10 mètres (km/h)
+                    </label>
+                    <label>
+                        <input type="checkbox" id="show-wind-dir" name="extra-info" value="wind-dir">
+                        Direction du vent (0 à 360°)
+                    </label>
+                    <label>
+                        <input type="checkbox" id="show-humidity" name="extra-info" value="humidity">
+                        Humidité relative (%)
+                    </label>
+                    <label>
+                        <input type="checkbox" id="show-sunrise" name="extra-info" value="sunrise">
+                        Heure du lever du soleil
+                    </label>
+                    <label>
+                        <input type="checkbox" id="show-sunset" name="extra-info" value="sunset">
+                        Heure du coucher du soleil
+                    </label>
+                </div>
+            </fieldset>
             <!-- Curseur pour choisir le nombre de jours -->
             <label for="forecast-days">Nombre de jours :</label>
             <input 
@@ -43,6 +80,8 @@
                 oninput="updateDaysLabel(this.value); fetchWeatherData();" 
             />
             <span id="days-label">7 jours</span>
+
+            
 
             <button type="submit">Obtenir la météo</button>
         </form>

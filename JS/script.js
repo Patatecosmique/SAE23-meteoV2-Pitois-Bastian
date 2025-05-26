@@ -6,12 +6,11 @@ const apiMeteoToken = "726b1c99c171e7c9d93155a0b1721f138a48d4c33ad10e533f84fbbd5
  */
 async function fetchWeatherData() {
     const postalCode = document.getElementById("postal-code").value.trim();
-    const days = document.getElementById("forecast-days").value; // Nombre de jours sélectionnés
+    const days = document.getElementById("forecast-days").value;
     const weatherResultContainer = document.getElementById("weather-result");
     weatherResultContainer.innerHTML = "Chargement...";
 
     try {
-        // Appel à l'API géographique pour récupérer les coordonnées de la commune
         const geoApiResponse = await fetch(`https://geo.api.gouv.fr/communes?codePostal=${postalCode}&fields=nom,centre&format=json`);
         const geoData = await geoApiResponse.json();
 
@@ -22,49 +21,61 @@ async function fetchWeatherData() {
 
         const { nom: cityName, centre: { coordinates: [longitude, latitude] } } = geoData[0];
 
-        // Appel à l'API météo pour récupérer les prévisions
         const weatherApiResponse = await fetch(`https://api.meteo-concept.com/api/forecast/daily?token=${apiMeteoToken}&latlng=${latitude},${longitude}`);
         const weatherData = await weatherApiResponse.json();
 
+        // Récupérer les options sélectionnées
+        const options = getSelectedOptions();
 
+        // Générer l'affichage météo selon les options
+        displayForecastCards(cityName, latitude, longitude, weatherData.forecast.slice(0, days), options);
 
-        // Génération du titre et des cartes météo
-        weatherResultContainer.innerHTML = `
-            <h1>Météo de ${cityName} pour ${days} jour${days > 1 ? "s" : ""}</h1>
-            <div class="weather-cards-container">
-                ${weatherData.forecast
-                    .slice(0, days) // Limite au nombre de jours sélectionnés
-                    .map((day, index) => {
-                        // Calculer la date pour chaque jour
-                        const today = new Date();
-                        const forecastDate = new Date(today);
-                        forecastDate.setDate(today.getDate() + index);
-                        const dateFormatter = new Intl.DateTimeFormat('fr-FR', { 
-                            weekday: 'long', 
-                            day: 'numeric', 
-                            month: 'long' 
-                        });
-                        const formattedDate = dateFormatter.format(forecastDate);
-                        const capitalizedDate = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
-
-                        return `
-                            <div class="weather-card">
-                                <h3>${index === 0 ? "Aujourd'hui" : capitalizedDate}</h3>
-                                <div class="icon"></div>
-                                <p><strong>Temp. Min :</strong> ${day.tmin}°C</p>
-                                <p><strong>Temp. Max :</strong> ${day.tmax}°C</p>
-                                <p><strong>Pluie :</strong> ${day.probarain ?? "N/A"}%</p>
-                            </div>
-                        `;
-                    })
-                    .join("")}
-            </div>
-        `;
-            
     } catch (error) {
         weatherResultContainer.innerHTML = "<p>Erreur lors de la récupération des données météo.</p>";
         console.error(error);
     }
+}
+
+// Nouvelle fonction pour afficher les cartes météo selon les options cochées
+function displayForecastCards(cityName, latitude, longitude, forecasts, options) {
+    const weatherResultContainer = document.getElementById("weather-result");
+    let html = `<h1>Météo de ${cityName} pour ${forecasts.length} jour${forecasts.length > 1 ? "s" : ""}</h1>`;
+    html += `<div class="weather-cards-container">`;
+
+    forecasts.forEach((day, index) => {
+        // Calcul de la date
+        const today = new Date();
+        const forecastDate = new Date(today);
+        forecastDate.setDate(today.getDate() + index);
+        const dateFormatter = new Intl.DateTimeFormat('fr-FR', {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'long'
+        });
+        const formattedDate = dateFormatter.format(forecastDate);
+        const capitalizedDate = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+
+        html += `<div class="weather-card">`;
+        html += `<h3>${index === 0 ? "Aujourd'hui" : capitalizedDate}</h3>`;
+        html += `<p><strong>Temp. Min :</strong> ${day.tmin}°C</p>`;
+        html += `<p><strong>Temp. Max :</strong> ${day.tmax}°C</p>`;
+        html += `<p><strong>Pluie :</strong> ${day.probarain ?? "N/A"}%</p>`;
+
+        // Affichage conditionnel selon les options
+        if (options.latitude) html += `<p><strong>Latitude :</strong> ${latitude}</p>`;
+        if (options.longitude) html += `<p><strong>Longitude :</strong> ${longitude}</p>`;
+        if (options.rain) html += `<p><strong>Cumul pluie :</strong> ${day.rr10 ?? "N/A"} mm</p>`;
+        if (options.wind) html += `<p><strong>Vent moyen :</strong> ${day.wind10m ?? "N/A"} km/h</p>`;
+        if (options.windDir) html += `<p><strong>Direction vent :</strong> ${day.dirwind10m ?? "N/A"}°</p>`;
+        if (options.humidity) html += `<p><strong>Humidité :</strong> ${day.humidity ?? "N/A"}%</p>`;
+        if (options.sunrise) html += `<p><strong>Lever du soleil :</strong> ${day.sunrise ?? "N/A"}</p>`;
+        if (options.sunset) html += `<p><strong>Coucher du soleil :</strong> ${day.sunset ?? "N/A"}</p>`;
+
+        html += `</div>`;
+    });
+
+    html += `</div>`;
+    weatherResultContainer.innerHTML = html;
 }
 
 /**
@@ -75,5 +86,40 @@ function updateDaysLabel(value) {
     document.getElementById("days-label").textContent = `${value} jour${value > 1 ? "s" : ""}`;
 }
 
+function getSelectedOptions() {
+    return {
+        latitude: document.getElementById('show-latitude').checked,
+        longitude: document.getElementById('show-longitude').checked,
+        rain: document.getElementById('show-rain').checked,
+        wind: document.getElementById('show-wind').checked,
+        windDir: document.getElementById('show-wind-dir').checked,
+        humidity: document.getElementById('show-humidity').checked,
+        sunrise: document.getElementById('show-sunrise').checked,
+        sunset: document.getElementById('show-sunset').checked,
+    };
+}
+
+function displayWeather(data) {
+    const options = getSelectedOptions();
+    const resultSection = document.getElementById('weather-result');
+    resultSection.innerHTML = ""; // Nettoie l'affichage précédent
+
+    // Exemple pour chaque jour (adapte selon ta structure de données)
+    data.forEach(day => {
+        let html = `<div class="weather-card">`;
+        html += `<h3>${day.date}</h3>`;
+        html += `<p>Température : ${day.temp}°C</p>`;
+        if (options.latitude && day.latitude) html += `<p>Latitude : ${day.latitude}</p>`;
+        if (options.longitude && day.longitude) html += `<p>Longitude : ${day.longitude}</p>`;
+        if (options.rain && day.rain) html += `<p>Cumul pluie : ${day.rain} mm</p>`;
+        if (options.wind && day.wind) html += `<p>Vent moyen : ${day.wind} km/h</p>`;
+        if (options.windDir && day.windDir) html += `<p>Direction vent : ${day.windDir}°</p>`;
+        if (options.humidity && day.humidity) html += `<p>Humidité : ${day.humidity}%</p>`;
+        if (options.sunrise && day.sunrise) html += `<p>Lever du soleil : ${day.sunrise}</p>`;
+        if (options.sunset && day.sunset) html += `<p>Coucher du soleil : ${day.sunset}</p>`;
+        html += `</div>`;
+        resultSection.innerHTML += html;
+    });
+}
 
 

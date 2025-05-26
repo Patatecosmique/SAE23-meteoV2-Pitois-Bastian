@@ -59,18 +59,15 @@ function displayForecastCards(cityName, latitude, longitude, forecasts, options)
         html += `<h3>${index === 0 ? "Aujourd'hui" : capitalizedDate}</h3>`;
         html += `<p><strong>Temp. Min :</strong> ${day.tmin}°C</p>`;
         html += `<p><strong>Temp. Max :</strong> ${day.tmax}°C</p>`;
-        html += `<p><strong>Pluie :</strong> ${day.probarain ?? "N/A"}%</p>`;
+        html += `<p><strong>Probabilité pluie :</strong> ${day.probarain ?? "N/A"}%</p>`;
 
-        // Affichage conditionnel selon les options
-        if (options.latitude) html += `<p><strong>Latitude :</strong> ${latitude}</p>`;
-        if (options.longitude) html += `<p><strong>Longitude :</strong> ${longitude}</p>`;
+        // Affichage d'une seule option "Coordonnée géographique"
+        if (options.coordinates) {
+            html += `<p><strong>Coordonnée géographique :</strong> ${latitude}, ${longitude}</p>`;
+        }
         if (options.rain) html += `<p><strong>Cumul pluie :</strong> ${day.rr10 ?? "N/A"} mm</p>`;
         if (options.wind) html += `<p><strong>Vent moyen :</strong> ${day.wind10m ?? "N/A"} km/h</p>`;
         if (options.windDir) html += `<p><strong>Direction vent :</strong> ${day.dirwind10m ?? "N/A"}°</p>`;
-        if (options.humidity) html += `<p><strong>Humidité :</strong> ${day.humidity ?? "N/A"}%</p>`;
-        if (options.sunrise) html += `<p><strong>Lever du soleil :</strong> ${day.sunrise ?? "N/A"}</p>`;
-        if (options.sunset) html += `<p><strong>Coucher du soleil :</strong> ${day.sunset ?? "N/A"}</p>`;
-
         html += `</div>`;
     });
 
@@ -88,13 +85,10 @@ function updateDaysLabel(value) {
 
 function getSelectedOptions() {
     return {
-        latitude: document.getElementById('show-latitude').checked,
-        longitude: document.getElementById('show-longitude').checked,
+        coordinates: document.getElementById('show-coordinates').checked,
         rain: document.getElementById('show-rain').checked,
         wind: document.getElementById('show-wind').checked,
         windDir: document.getElementById('show-wind-dir').checked,
-        humidity: document.getElementById('show-humidity').checked
-        // sunrise et sunset supprimés
     };
 }
 
@@ -112,8 +106,6 @@ function displayWeather(data) {
         if (options.rain && day.rain) html += `<p>Cumul pluie : ${day.rain} mm</p>`;
         if (options.wind && day.wind) html += `<p>Vent moyen : ${day.wind} km/h</p>`;
         if (options.windDir && day.windDir) html += `<p>Direction vent : ${day.windDir}°</p>`;
-        if (options.humidity && day.humidity) html += `<p>Humidité : ${day.humidity}%</p>`;
-        // sunrise et sunset supprimés
         html += `</div>`;
         resultSection.innerHTML += html;
     });

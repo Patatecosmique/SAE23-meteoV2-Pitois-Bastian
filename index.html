@@ -2,12 +2,12 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Météo par Code Postal</title>
-    <meta name="description" content="Obtenez la météo actuelle pour un code postal français." />
+    <meta name="description" content="Obtenez la météo actuelle pour un code postal français.">
     <!-- Lien vers le fichier CSS externe -->
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style.css">
     <!-- Lien vers le fichier JavaScript externe -->
     <script src="/js/script.js" defer></script>
 </head>
@@ -16,9 +16,9 @@
     <div id="loader-frog">
         <div class="tenor-gif-embed" data-postid="24153028" data-share-method="host" data-aspect-ratio="1" data-width="120px"></div>
         <div class="loader-text">Chargement...</div>
-        <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+        <script async src="https://tenor.com/embed.js"></script>
     </div>
-    <main role="main">
+    <main>
         <!-- Titre principal de la page -->
         <h1 id="page-title">Météo par Code Postal</h1>
 
@@ -31,9 +31,8 @@
                 name="postal-code" 
                 required 
                 pattern="[0-9]{5}" 
-                inputmode="numeric" 
-                placeholder="Ex : 75001" 
-            />
+                placeholder="Ex : 75001"
+            >
             <small id="postal-code-help">Entrez un code postal français à 5 chiffres.</small>
             <!-- Options d'informations supplémentaires -->
             <fieldset>
@@ -66,17 +65,16 @@
                 min="1" 
                 max="14" 
                 value="7" 
-                oninput="updateDaysLabel(this.value); fetchWeatherData();" 
-            />
+                oninput="updateDaysLabel(this.value); fetchWeatherData();"
+            >
             <span id="days-label">7 jours</span>
-
-            
 
             <button type="submit">Obtenir la météo</button>
         </form>
 
         <!-- Section où les résultats de la météo seront affichés -->
         <section id="weather-result" class="result">
+            <h2>Résultats météo</h2>
             <!-- Les cartes météo seront générées dynamiquement ici -->
         </section>
     </main>

@@ -79,12 +79,30 @@
             <!-- Les cartes météo seront générées dynamiquement ici -->
         </section>
 
-        <!-- À placer juste après le formulaire -->
-        <section id="history-section" aria-live="polite">
-          <h2>Historique des recherches</h2>
-          <ul id="history-list"></ul>
-        </section>
+        <!-- Onglet historique (icône SVG moderne) -->
+        <div id="history-tab">
+            <button id="open-history" aria-label="Afficher l'historique des recherches">
+                <!-- Icône SVG horloge stylisée -->
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                    <circle cx="12" cy="12" r="10" stroke="#1976d2" stroke-width="2" fill="#fff"/>
+                    <path d="M12 7v5l3 3" stroke="#1976d2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <aside id="history-panel" aria-label="Historique des recherches" tabindex="-1">
+                <button id="close-history" aria-label="Fermer l'historique">✖</button>
+                <section id="history-section" aria-live="polite">
+                    <h2>Historique des recherches</h2>
+                    <ul id="history-list"></ul>
+                </section>
+            </aside>
+        </div>
     </main>
+
+    <!-- À placer juste après <body> -->
+    <input type="checkbox" id="toggle-history" class="toggle-history-checkbox" hidden>
+    <label for="toggle-history" class="history-icon" aria-label="Afficher l'historique" tabindex="0">
+        <span>🕑</span>
+    </label>
 </body>
 
 </html>

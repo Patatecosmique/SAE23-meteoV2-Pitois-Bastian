@@ -295,6 +295,130 @@ fieldset legend {
 }
 
 /* ========================= */
+/* HISTORIQUE                */
+/* ========================= */
+#history-section {
+    margin-top: 24px;
+    background: #f7fbff;
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 1px 6px rgba(0,120,215,0.05);
+}
+
+#history-section h2 {
+    font-size: 1.2rem;
+    color: #1976d2;
+    margin-bottom: 10px;
+}
+
+#history-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#history-list li {
+    padding: 6px 0;
+    border-bottom: 1px solid #e3f0ff;
+    font-size: 1rem;
+}
+
+#history-list li:last-child {
+    border-bottom: none;
+}
+
+/* ========================= */
+/* ONGLET HISTORIQUE         */
+/* ========================= */
+#history-tab {
+    position: fixed;
+    top: 24px;
+    right: 32px;
+    z-index: 12000;
+}
+#open-history {
+    background: #fff;
+    border: 2px solid #1976d2;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(25,118,210,0.10);
+    width: 54px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+#open-history svg {
+    display: block;
+}
+#open-history:hover,
+#open-history:focus {
+    background: #1976d2;
+    border-color: #1976d2;
+    box-shadow: 0 4px 16px rgba(25,118,210,0.18);
+}
+#open-history:hover svg circle,
+#open-history:focus svg circle {
+    fill: #1976d2;
+    stroke: #fff;
+}
+#open-history:hover svg path,
+#open-history:focus svg path {
+    stroke: #fff;
+}
+
+/* Panneau historique latéral masqué par défaut */
+#history-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 340px;
+    max-width: 95vw;
+    height: 100vh;
+    background: #f7fbff;
+    box-shadow: -2px 0 16px rgba(0,0,0,0.10);
+    border-radius: 16px 0 0 16px;
+    transform: translateX(110%);
+    transition: transform 0.3s;
+    z-index: 11999;
+    overflow-y: auto;
+    padding-top: 80px;
+    padding-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+}
+#history-panel.open {
+    transform: translateX(0);
+}
+#close-history {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #1976d2;
+    cursor: pointer;
+    z-index: 12001;
+}
+#close-history:hover, #close-history:focus {
+    color: #e65100;
+    outline: 2px solid #e65100;
+}
+
+/* Responsive pour l'onglet historique */
+@media (max-width: 600px) {
+    #history-panel {
+        width: 98vw;
+        border-radius: 0;
+        padding-top: 60px;
+    }
+}
+
+/* ========================= */
 /* RESPONSIVE DESIGN         */
 /* ========================= */
 

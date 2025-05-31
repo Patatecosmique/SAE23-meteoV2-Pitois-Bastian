@@ -170,3 +170,19 @@ function displayHistory() {
 // Affiche l'historique au chargement de la page
 window.addEventListener('DOMContentLoaded', displayHistory);
 // ===================== FIN HISTORIQUE RECHERCHES ===================== //
+
+// Gestion de l'ouverture/fermeture de l'onglet historique
+document.getElementById('open-history').addEventListener('click', function() {
+    document.getElementById('history-panel').classList.add('open');
+    document.getElementById('history-panel').focus();
+});
+document.getElementById('close-history').addEventListener('click', function() {
+    document.getElementById('history-panel').classList.remove('open');
+});
+
+// (Optionnel) Fermer l'onglet avec la touche Échap
+document.addEventListener('keydown', function(e) {
+    if (e.key === "Escape") {
+        document.getElementById('history-panel').classList.remove('open');
+    }
+});

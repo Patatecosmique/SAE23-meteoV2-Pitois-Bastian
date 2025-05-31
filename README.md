@@ -19,6 +19,10 @@ Ce site est **validé W3C** pour l’HTML et le CSS :
 - [Valideur HTML W3C](https://validator.w3.org/)
 - [Valideur CSS W3C](https://jigsaw.w3.org/css-validator/)
 
+## Voir le site en ligne
+
+👉 [https://patatecosmique.github.io/SAE23-meteoV2-Pitois-Bastian/](https://patatecosmique.github.io/SAE23-meteoV2-Pitois-Bastian/)
+
 ## Technologies utilisées
 
 - **HTML5**

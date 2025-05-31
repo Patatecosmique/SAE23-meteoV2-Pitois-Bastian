@@ -334,3 +334,37 @@ fieldset legend {
     align-items: center;
     transition: opacity 3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+
+/* ========================= */
+/* RESPONSIVE DESIGN         */
+/* ========================= */
+
+/* Mobiles (jusqu'à 600px) */
+@media (max-width: 600px) {
+    main {
+        padding: 12px 2vw 24px 2vw;
+        border-radius: 0;
+        box-shadow: none;
+        margin: 0;
+        max-width: 100vw;
+    }
+    form {
+        padding: 16px 4vw 12px 4vw;
+    }
+    .weather-card {
+        min-width: 90vw;
+        max-width: 98vw;
+        padding: 16px 8px 14px 8px;
+    }
+    .fieldset-options {
+        grid-template-columns: 1fr;
+        gap: 8px 0;
+    }
+    h1 {
+        font-size: 1.5rem;
+    }
+    .weather-title {
+        font-size: 1.2rem;
+    }
+}

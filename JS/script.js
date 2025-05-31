@@ -3,6 +3,9 @@
 const apiMeteoToken = "726b1c99c171e7c9d93155a0b1721f138a48d4c33ad10e533f84fbbd55d62140";
 // ===================== FIN CONFIGURATION API =====================
 
+
+// ===================== FONCTIONS PRINCIPALES =====================
+
 /**
  * Récupère et affiche la météo selon le code postal et les options choisies.
  */
@@ -14,7 +17,7 @@ async function fetchWeatherData() {
     weatherResultContainer.innerHTML = "Chargement...";
 
     try {
-        // Appel API pour obtenir la commune à partir du code postal
+        // 1. Récupération des coordonnées de la commune
         const geoApiResponse = await fetch(`https://geo.api.gouv.fr/communes?codePostal=${postalCode}&fields=nom,centre&format=json`);
         const geoData = await geoApiResponse.json();
 
@@ -24,17 +27,16 @@ async function fetchWeatherData() {
             return;
         }
 
-        // Extraction du nom et des coordonnées de la commune
         const { nom: cityName, centre: { coordinates: [longitude, latitude] } } = geoData[0];
 
-        // Appel API météo avec les coordonnées
+        // 2. Récupération des prévisions météo
         const weatherApiResponse = await fetch(`https://api.meteo-concept.com/api/forecast/daily?token=${apiMeteoToken}&latlng=${latitude},${longitude}`);
         const weatherData = await weatherApiResponse.json();
 
-        // Récupération des options cochées par l'utilisateur
+        // 3. Options utilisateur
         const options = getSelectedOptions();
 
-        // Affichage des cartes météo
+        // 4. Affichage des cartes météo
         displayForecastCards(cityName, latitude, longitude, weatherData.forecast.slice(0, days), options);
 
     } catch (error) {
@@ -44,7 +46,8 @@ async function fetchWeatherData() {
     }
 }
 
-// ===================== AFFICHAGE DES CARTES MÉTÉO =====================
+// ===================== AFFICHAGE DES CARTES MÉTÉO ===================== //
+
 /**
  * Affiche les cartes météo pour chaque jour, selon les options cochées.
  */
@@ -54,7 +57,7 @@ function displayForecastCards(cityName, latitude, longitude, forecasts, options)
     html += `<div class="weather-cards-container">`;
 
     forecasts.forEach((day, index) => {
-        // Calcul de la date de prévision
+        // Date de prévision formatée
         const today = new Date();
         const forecastDate = new Date(today);
         forecastDate.setDate(today.getDate() + index);
@@ -66,18 +69,15 @@ function displayForecastCards(cityName, latitude, longitude, forecasts, options)
         const formattedDate = dateFormatter.format(forecastDate);
         const capitalizedDate = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
 
-        // Sélection du GIF météo selon les conditions du jour
+        // Sélection de l'icône météo
         let iconGif = "sun.gif";
-        if (day.wind10m !== undefined && day.wind10m !== null && day.wind10m > 40) {
+        if (day.wind10m > 40) {
             iconGif = "wind.gif";
-        } else if (day.rr10 !== undefined && day.rr10 !== null && day.rr10 > 5) {
+        } else if (day.rr10 > 5) {
             iconGif = "rain.gif";
-        } else if (
-            (day.probarain !== undefined && day.probarain !== null && day.probarain > 30) ||
-            (day.cloudcover !== undefined && day.cloudcover !== null && day.cloudcover > 60)
-        ) {
+        } else if ((day.probarain > 30) || (day.cloudcover > 60)) {
             iconGif = "rain-cloud.gif";
-        } else if (day.sunshine !== undefined && day.sunshine !== null && day.sunshine > 5 * 60) {
+        } else if (day.sunshine > 5 * 60) {
             iconGif = "sun.gif";
         }
 
@@ -99,7 +99,7 @@ function displayForecastCards(cityName, latitude, longitude, forecasts, options)
     html += `</div>`;
     weatherResultContainer.innerHTML = html;
 }
-// ===================== FIN AFFICHAGE CARTES MÉTÉO =====================
+// ===================== FIN AFFICHAGE CARTES MÉTÉO ===================== //
 
 
 // ===================== OUTILS UI =====================
@@ -121,7 +121,7 @@ function getSelectedOptions() {
         windDir: document.getElementById('show-wind-dir').checked,
     };
 }
-// ===================== FIN OUTILS UI =====================
+// ===================== FIN OUTILS UI ===================== // 
 
 
 // ===================== LOADER (écran de chargement) =====================

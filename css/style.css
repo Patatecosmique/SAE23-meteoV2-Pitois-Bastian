@@ -402,3 +402,18 @@ fieldset legend {
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
+/* Grands écrans (plus de 1200px) */
+@media (min-width: 1201px) {
+    main {
+        max-width: 1100px;
+        padding: 40px 32px 60px 32px;
+    }
+    .weather-card {
+        min-width: 260px;
+        max-width: 340px;
+    }
+    .fieldset-options {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

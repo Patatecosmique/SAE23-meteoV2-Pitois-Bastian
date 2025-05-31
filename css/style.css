@@ -387,3 +387,18 @@ fieldset legend {
         font-size: 2rem;
     }
 }
+
+/* Desktop standard (901px à 1200px) */
+@media (min-width: 901px) and (max-width: 1200px) {
+    main {
+        max-width: 900px;
+        padding: 32px 24px 48px 24px;
+    }
+    .weather-card {
+        min-width: 240px;
+        max-width: 320px;
+    }
+    .fieldset-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

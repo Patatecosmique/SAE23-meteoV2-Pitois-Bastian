@@ -39,6 +39,9 @@ async function fetchWeatherData() {
         // 4. Affichage des cartes météo
         displayForecastCards(cityName, latitude, longitude, weatherData.forecast.slice(0, days), options);
 
+        // Ajout à l'historique des recherches
+        addToHistory(cityName, postalCode, new Date().toLocaleString('fr-FR'));
+
     } catch (error) {
         // Gestion des erreurs réseau ou API
         weatherResultContainer.innerHTML = "<p>Erreur lors de la récupération des données météo.</p>";
@@ -134,3 +137,36 @@ window.addEventListener('load', function() {
     }, 3000); 
 });
 // ===================== FIN LOADER =====================
+
+// ===================== HISTORIQUE RECHERCHES ===================== //
+
+/**
+ * Ajoute une recherche à l'historique et l'affiche
+ */
+function addToHistory(city, postalCode, date) {
+    const history = JSON.parse(localStorage.getItem('weatherHistory') || '[]');
+    history.unshift({ city, postalCode, date });
+    localStorage.setItem('weatherHistory', JSON.stringify(history.slice(0, 5))); // max 5 entrées
+    displayHistory();
+}
+
+/**
+ * Affiche l'historique des recherches
+ */
+function displayHistory() {
+    const history = JSON.parse(localStorage.getItem('weatherHistory') || '[]');
+    const list = document.getElementById('history-list');
+    if (!list) return;
+    list.innerHTML = history.length === 0
+        ? "<li>Aucune recherche récente.</li>"
+        : history.map(item =>
+            `<li>
+                <strong>${item.city}</strong> (${item.postalCode})<br>
+                <small>${item.date}</small>
+            </li>`
+        ).join('');
+}
+
+// Affiche l'historique au chargement de la page
+window.addEventListener('DOMContentLoaded', displayHistory);
+// ===================== FIN HISTORIQUE RECHERCHES ===================== //

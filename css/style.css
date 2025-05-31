@@ -368,3 +368,22 @@ fieldset legend {
         font-size: 1.2rem;
     }
 }
+
+/* Tablettes (601px à 900px) */
+@media (min-width: 601px) and (max-width: 900px) {
+    main {
+        max-width: 98vw;
+        padding: 24px 4vw 32px 4vw;
+    }
+    .weather-card {
+        min-width: 260px;
+        max-width: 48vw;
+        padding: 20px 10px 16px 10px;
+    }
+    .fieldset-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    h1 {
+        font-size: 2rem;
+    }
+}

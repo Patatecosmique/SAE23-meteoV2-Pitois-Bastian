@@ -1,16 +1,16 @@
 /* ========================= */
-/* VARIABLES GLOBALES       */
+/* VARIABLES GLOBALES        */
 /* ========================= */
 :root {
-    --blue: #007BFF; /* Couleur principale */
-    --dark-blue: #0056b3; /* Couleur pour hover/focus */
-    --text-color: #212529; /* Couleur du texte */
-    --bg-color: #f0f4f8; /* Couleur de fond */
-    --white: #ffffff; /* Couleur blanche */
+    --blue: #007BFF;
+    --dark-blue: #0056b3;
+    --text-color: #212529;
+    --bg-color: #f0f4f8;
+    --white: #ffffff;
 }
 
 /* ========================= */
-/* STYLE GLOBAL             */
+/* RESET & STYLE GLOBAL      */
 /* ========================= */
 body {
     background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
@@ -21,14 +21,6 @@ body {
     background-color: #f4f4f9;
     color: #333;
 }
-/* ========================= */
-/* EFFETS FOCUS             */
-/* ========================= */
-input:focus,
-button:focus {
-    outline: 2px solid var(--blue); 
-    outline-offset: 2px; 
-}
 
 footer {
     text-align: center;
@@ -37,9 +29,17 @@ footer {
     color: #777;
 }
 
+/* ========================= */
+/* ACCESSIBILITÉ & FOCUS     */
+/* ========================= */
+input:focus,
+button:focus {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+}
 
 /* ========================= */
-/* CONTENEUR PRINCIPAL      */
+/* STRUCTURE PRINCIPALE      */
 /* ========================= */
 main {
     max-width: 900px;
@@ -51,7 +51,7 @@ main {
 }
 
 /* ========================= */
-/* TITRES                   */
+/* TYPOGRAPHIE               */
 /* ========================= */
 h1 {
     font-size: 2.3rem;
@@ -61,14 +61,21 @@ h1 {
     text-align: center;
 }
 
-/* ========================= */
-/* FORMULAIRE               */
-/* ========================= */
+.weather-title {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+}
 
+/* ========================= */
+/* FORMULAIRE                */
+/* ========================= */
 form {
     display: flex;
-    flex-direction: column; 
-    gap: 1rem; 
+    flex-direction: column;
+    gap: 1rem;
     background: #f7fbff;
     border-radius: 16px;
     box-shadow: 0 2px 12px rgba(0,120,215,0.04);
@@ -77,10 +84,11 @@ form {
 }
 
 label {
-    font-weight: bold; 
+    font-weight: bold;
 }
 
-input[type="text"], input[type="range"] {
+input[type="text"],
+input[type="range"] {
     background: #fff;
     border: 1.5px solid #b3d1f7;
     border-radius: 8px;
@@ -90,50 +98,13 @@ input[type="text"], input[type="range"] {
     transition: border 0.2s;
 }
 
-input[type="text"]:focus, input[type="range"]:focus {
+input[type="text"]:focus,
+input[type="range"]:focus {
     border: 1.5px solid #1976d2;
 }
 
-.search-card {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-
-.search-card label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 600;
-}
-
-.search-card input[type="text"],
-.search-card input[type="range"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.search-card .primary-button {
-    display: inline-block;
-    background: #007BFF;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-}
-
-.search-card .primary-button:hover {
-    background: #0056b3;
-}
-
 /* ========================= */
-/* BOUTONS                  */
+/* BOUTONS                   */
 /* ========================= */
 button {
     background: linear-gradient(90deg, #1976d2 60%, #63a4ff 100%);
@@ -148,13 +119,14 @@ button {
     transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
 }
 
-button:hover, button:focus {
+button:hover,
+button:focus {
     background: linear-gradient(90deg, #1565c0 60%, #1976d2 100%);
     transform: translateY(-2px) scale(1.03);
 }
 
 /* ========================= */
-/* OPTION                */
+/* OPTIONS (FIELDSET)        */
 /* ========================= */
 fieldset {
     border: 1px solid #ccc;
@@ -202,21 +174,12 @@ fieldset legend {
 }
 
 /* ========================= */
-/* SECTION DES RÉSULTATS    */
+/* RÉSULTATS MÉTÉO           */
 /* ========================= */
 .result {
     margin-top: 20px;
 }
 
-.weather-title {
-    text-align: center;
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-bottom: 2rem; 
-    color: var(--text-color);
-}
-
-/* Conteneur des cartes météo */
 .weather-cards-container {
     display: flex;
     flex-wrap: wrap;
@@ -224,9 +187,8 @@ fieldset legend {
     justify-content: center;
 }
 
-/* Style des cartes */
 .weather-card {
-    background: #fff; /* Fond uni blanc pour bien voir les GIFs */
+    background: #fff;
     border-radius: 18px;
     box-shadow: 0 4px 24px rgba(0,0,0,0.10);
     padding: 28px 22px 20px 22px;
@@ -247,7 +209,6 @@ fieldset legend {
     background: #f7fbff;
 }
 
-/* Titre de la carte */
 .weather-card h3 {
     font-size: 1.3rem;
     margin-bottom: 0.7em;
@@ -255,7 +216,6 @@ fieldset legend {
     letter-spacing: 0.02em;
 }
 
-/* Icône météo */
 .weather-card .weather-icon {
     font-size: 3.5rem;
     margin-bottom: 0.5em;
@@ -266,11 +226,9 @@ fieldset legend {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
-    height: 70px; 
+    height: 70px;
 }
 
-
-/* Informations météo */
 .weather-card p {
     margin: 0.4em 0;
     font-size: 1.08rem;
@@ -317,8 +275,9 @@ fieldset legend {
     font-size: 0.9rem;
     color: #555;
 }
+
 /* ========================= */
-/* LOADER  */
+/* LOADER                    */
 /* ========================= */
 #loader-frog {
     position: fixed;
@@ -334,7 +293,6 @@ fieldset legend {
     align-items: center;
     transition: opacity 3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 
 /* ========================= */
 /* RESPONSIVE DESIGN         */

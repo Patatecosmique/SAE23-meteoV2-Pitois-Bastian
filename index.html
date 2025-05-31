@@ -7,13 +7,13 @@
     <title>Météo par Code Postal</title>
     <meta name="description" content="Obtenez la météo actuelle pour un code postal français.">
     <!-- Lien vers le fichier CSS externe -->
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="css/style.css">
     <!-- Lien vers le fichier JavaScript externe -->
     <script src="./JS/script.js" defer></script>
 </head>
 
 <body>
-    <div id="loader-frog">
+    <div id="loader-frog" aria-busy="true">
         <div class="tenor-gif-embed" data-postid="24153028" data-share-method="host" data-aspect-ratio="1" data-width="120px"></div>
         <div class="loader-text">Chargement...</div>
         <script async src="https://tenor.com/embed.js"></script>
@@ -32,6 +32,7 @@
                 required 
                 pattern="[0-9]{5}" 
                 placeholder="Ex : 75001"
+                aria-describedby="postal-code-help"
             >
             <small id="postal-code-help">Entrez un code postal français à 5 chiffres.</small>
             <!-- Options d'informations supplémentaires -->
@@ -69,11 +70,11 @@
             >
             <span id="days-label">7 jours</span>
 
-            <button type="submit">Obtenir la météo</button>
+            <button type="submit" aria-label="Obtenir la météo pour le code postal saisi">Obtenir la météo</button>
         </form>
 
         <!-- Section où les résultats de la météo seront affichés -->
-        <section id="weather-result" class="result">
+        <section id="weather-result" class="result" aria-live="polite">
             <h2>Résultats météo</h2>
             <!-- Les cartes météo seront générées dynamiquement ici -->
         </section>

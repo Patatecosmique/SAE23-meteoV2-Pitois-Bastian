@@ -330,6 +330,7 @@ fieldset legend {
 /* ========================= */
 /* ONGLET HISTORIQUE         */
 /* ========================= */
+
 #history-tab {
     position: fixed;
     top: 24px;
@@ -409,15 +410,6 @@ fieldset legend {
     outline: 2px solid #e65100;
 }
 
-/* Responsive pour l'onglet historique */
-@media (max-width: 600px) {
-    #history-panel {
-        width: 98vw;
-        border-radius: 0;
-        padding-top: 60px;
-    }
-}
-
 /* ========================= */
 /* RESPONSIVE DESIGN         */
 /* ========================= */
@@ -449,7 +441,13 @@ fieldset legend {
     .weather-title {
         font-size: 1.2rem;
     }
+    #history-panel {
+        width: 98vw;
+        border-radius: 0;
+        padding-top: 60px;
+    }
 }
+
 
 /* Tablettes (601px à 900px) */
 @media (min-width: 601px) and (max-width: 900px) {
@@ -499,3 +497,4 @@ fieldset legend {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+

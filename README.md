@@ -4,13 +4,13 @@ Bienvenue sur **Météo par Code Postal**, un site web moderne, accessible et re
 
 ## Fonctionnalités principales
 
-- Recherche météo par code postal français
-- Affichage des prévisions sur plusieurs jours
-- Options d’affichage : coordonnées, pluie, vent, direction du vent
+- **Recherche météo** par code postal français
+- **Affichage des prévisions** sur plusieurs jours
+- **Options d’affichage** : coordonnées, pluie, vent, direction du vent
 - **Historique des recherches** accessible via un onglet latéral (icône horloge en haut à droite)
-- Loader animé lors du chargement
-- Design responsive (mobile, tablette, desktop)
-- Accessibilité conforme WCAG 2.0 AA
+- **Loader animé** lors du chargement
+- **Design responsive** (mobile, tablette, desktop)
+- **Accessibilité conforme** WCAG 2.0 AA
 
 ## Validation W3C
 

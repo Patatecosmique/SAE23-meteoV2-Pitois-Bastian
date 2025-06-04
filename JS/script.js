@@ -27,7 +27,9 @@ async function fetchWeatherData() {
             return;
         }
 
-        const { nom: cityName, centre: { coordinates: [longitude, latitude] } } = geoData[0];
+        const { nom: cityName, centre:
+            { coordinates: [longitude, latitude] }
+        } = geoData[0];
 
         // 2. Récupération des prévisions météo
         const weatherApiResponse = await fetch(`https://api.meteo-concept.com/api/forecast/daily?token=${apiMeteoToken}&latlng=${latitude},${longitude}`);
@@ -48,6 +50,28 @@ async function fetchWeatherData() {
         console.error(error);
     }
 }
+
+// ===================== OUTILS UI =====================
+/**
+ * Met à jour l'étiquette du nombre de jours sélectionnés (slider)
+ */
+function updateDaysLabel(value) {
+    document.getElementById("days-label").textContent = `${value} jour${value > 1 ? "s" : ""}`;
+}
+
+/**
+ * Récupère les options cochées dans le formulaire (coordonnées, pluie, vent, direction)
+ */
+function getSelectedOptions() {
+    return {
+        coordinates: document.getElementById('show-coordinates').checked,
+        rain: document.getElementById('show-rain').checked,
+        wind: document.getElementById('show-wind').checked,
+        windDir: document.getElementById('show-wind-dir').checked,
+    };
+}
+// ===================== FIN OUTILS UI ===================== // 
+
 
 // ===================== AFFICHAGE DES CARTES MÉTÉO ===================== //
 
@@ -99,42 +123,22 @@ function displayForecastCards(cityName, latitude, longitude, forecasts, options)
         html += `</div>`;
     });
 
-    html += `</div>`;
+    
     weatherResultContainer.innerHTML = html;
 }
 // ===================== FIN AFFICHAGE CARTES MÉTÉO ===================== //
 
 
-// ===================== OUTILS UI =====================
-/**
- * Met à jour l'étiquette du nombre de jours sélectionnés (slider)
- */
-function updateDaysLabel(value) {
-    document.getElementById("days-label").textContent = `${value} jour${value > 1 ? "s" : ""}`;
-}
-
-/**
- * Récupère les options cochées dans le formulaire (coordonnées, pluie, vent, direction)
- */
-function getSelectedOptions() {
-    return {
-        coordinates: document.getElementById('show-coordinates').checked,
-        rain: document.getElementById('show-rain').checked,
-        wind: document.getElementById('show-wind').checked,
-        windDir: document.getElementById('show-wind-dir').checked,
-    };
-}
-// ===================== FIN OUTILS UI ===================== // 
 
 
 // ===================== LOADER (écran de chargement) =====================
 
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
     const loader = document.getElementById('loader-frog');
-    loader.classList.add('hide'); 
+    loader.classList.add('hide');
     setTimeout(() => {
-        loader.style.display = 'none'; 
-    }, 3000); 
+        loader.style.display = 'none';
+    }, 3000);
 });
 // ===================== FIN LOADER =====================
 
@@ -172,17 +176,18 @@ window.addEventListener('DOMContentLoaded', displayHistory);
 // ===================== FIN HISTORIQUE RECHERCHES ===================== //
 
 // Gestion de l'ouverture/fermeture de l'onglet historique
-document.getElementById('open-history').addEventListener('click', function() {
+document.getElementById('open-history').addEventListener('click', function () {
     document.getElementById('history-panel').classList.add('open');
     document.getElementById('history-panel').focus();
 });
-document.getElementById('close-history').addEventListener('click', function() {
+document.getElementById('close-history').addEventListener('click', function () {
     document.getElementById('history-panel').classList.remove('open');
 });
 
 // (Optionnel) Fermer l'onglet avec la touche Échap
-document.addEventListener('keydown', function(e) {
+document.addEventListener('keydown', function (e) {
     if (e.key === "Escape") {
         document.getElementById('history-panel').classList.remove('open');
     }
 });
+
